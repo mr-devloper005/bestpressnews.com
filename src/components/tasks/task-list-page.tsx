@@ -40,9 +40,17 @@ const variantShells = {
   'sbm-library': 'bg-[linear-gradient(180deg,#f7f8fc_0%,#ffffff_100%)]',
 } as const
 
-export async function TaskListPage({ task, category }: { task: TaskKey; category?: string }) {
+export async function TaskListPage({
+  task,
+  category,
+  sort,
+}: {
+  task: TaskKey
+  category?: string
+  sort?: 'new' | 'old'
+}) {
   if (TASK_LIST_PAGE_OVERRIDE_ENABLED) {
-    return await TaskListPageOverride({ task, category })
+    return await TaskListPageOverride({ task, category, sort })
   }
 
   const taskConfig = getTaskConfig(task)

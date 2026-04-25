@@ -6,14 +6,23 @@ import { getFactoryState } from '@/design/factory/get-factory-state'
 import { getProductKind } from '@/design/factory/get-product-kind'
 import { LOGIN_PAGE_OVERRIDE_ENABLED, LoginPageOverride } from '@/overrides/login-page'
 
+/** Matches site brand tokens: navy #102E50, gold #F5C45E, ember #E78B48, paper #f6f2ea */
+const loginTheme = {
+  shell: 'bg-[#f6f2ea] text-[#10202e]',
+  panel: 'border border-[#d4cdc0] bg-white shadow-sm',
+  side: 'border border-[#d4cdc0] bg-gradient-to-b from-white to-[#f0ebe2] shadow-sm',
+  muted: 'text-[#4a5568]',
+  action: 'bg-[#102e50] text-[#f5c45e] shadow-md hover:bg-[#1a4a6e] hover:text-[#ffd87a] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#e78b48]',
+  field:
+    'h-12 w-full rounded-xl border border-[#d4cdc0] bg-white px-4 text-sm text-[#10202e] placeholder:text-[#8a9ba8] focus:border-[#e78b48] focus:outline-none focus:ring-1 focus:ring-[#e78b48]/35',
+  link: 'text-[#102e50] hover:text-[#be3d2a] hover:underline',
+  listItem: 'rounded-2xl border border-[#d4cdc0]/60 bg-white/50 px-4 py-3 text-sm text-[#2d3a45]',
+} as const
+
 function getLoginConfig(kind: ReturnType<typeof getProductKind>) {
   if (kind === 'directory') {
     return {
-      shell: 'bg-[#f8fbff] text-slate-950',
-      panel: 'border border-slate-200 bg-white',
-      side: 'border border-slate-200 bg-slate-50',
-      muted: 'text-slate-600',
-      action: 'bg-slate-950 text-white hover:bg-slate-800',
+      ...loginTheme,
       icon: Building2,
       title: 'Access your business dashboard',
       body: 'Manage listings, verification details, contact info, and local discovery surfaces from one place.',
@@ -21,34 +30,22 @@ function getLoginConfig(kind: ReturnType<typeof getProductKind>) {
   }
   if (kind === 'editorial') {
     return {
-      shell: 'bg-[#fbf6ee] text-[#241711]',
-      panel: 'border border-[#dcc8b7] bg-[#fffdfa]',
-      side: 'border border-[#e6d6c8] bg-[#fff4e8]',
-      muted: 'text-[#6e5547]',
-      action: 'bg-[#241711] text-[#fff1e2] hover:bg-[#3a241b]',
+      ...loginTheme,
       icon: FileText,
-      title: 'Sign in to your publication workspace',
-      body: 'Draft, review, and publish long-form work with the calmer reading system intact.',
+      title: 'Sign in to your press workspace',
+      body: 'File releases, follow pickup, and keep the newsroom aligned on one clear surface.',
     }
   }
   if (kind === 'visual') {
     return {
-      shell: 'bg-[#07101f] text-white',
-      panel: 'border border-white/10 bg-white/6',
-      side: 'border border-white/10 bg-white/5',
-      muted: 'text-slate-300',
-      action: 'bg-[#8df0c8] text-[#07111f] hover:bg-[#77dfb8]',
+      ...loginTheme,
       icon: ImageIcon,
       title: 'Enter the creator workspace',
       body: 'Open your visual feed, creator profile, and publishing tools without dropping into a generic admin shell.',
     }
   }
   return {
-    shell: 'bg-[#f7f1ea] text-[#261811]',
-    panel: 'border border-[#ddcdbd] bg-[#fffaf4]',
-    side: 'border border-[#e8dbce] bg-[#f3e8db]',
-    muted: 'text-[#71574a]',
-    action: 'bg-[#5b2b3b] text-[#fff0f5] hover:bg-[#74364b]',
+    ...loginTheme,
     icon: Bookmark,
     title: 'Open your curated collections',
     body: 'Manage saved resources, collection notes, and curator identity from a calmer workspace.',
@@ -70,28 +67,34 @@ export default function LoginPage() {
       <NavbarShell />
       <main className="mx-auto max-w-7xl px-4 py-14 sm:px-6 lg:px-8">
         <section className="grid gap-8 lg:grid-cols-[0.88fr_1.12fr] lg:items-stretch">
-          <div className={`rounded-[2rem] p-8 ${config.side}`}>
-            <Icon className="h-8 w-8" />
-            <h1 className="mt-5 text-4xl font-semibold tracking-[-0.05em]">{config.title}</h1>
+          <div className={`rounded-2xl p-8 ${config.side}`}>
+            <Icon className="h-8 w-8 text-[#e78b48]" aria-hidden />
+            <h1 className="mt-5 font-display text-3xl font-semibold tracking-tight text-[#102e50] sm:text-4xl">{config.title}</h1>
             <p className={`mt-5 text-sm leading-8 ${config.muted}`}>{config.body}</p>
-            <div className="mt-8 grid gap-4">
-              {['Cleaner product-specific workflows', 'Palette and layout matched to the site family', 'Fewer repeated admin patterns'].map((item) => (
-                <div key={item} className="rounded-[1.5rem] border border-current/10 px-4 py-4 text-sm">{item}</div>
+            <div className="mt-8 grid gap-3">
+              {['Secure access to your distribution account', 'Palette aligned with the public site', 'Fewer admin chrome surprises'].map((item) => (
+                <div key={item} className={config.listItem}>
+                  {item}
+                </div>
               ))}
             </div>
           </div>
 
-          <div className={`rounded-[2rem] p-8 ${config.panel}`}>
-            <p className="text-xs font-semibold uppercase tracking-[0.24em] opacity-70">Welcome back</p>
+          <div className={`rounded-2xl p-8 ${config.panel}`}>
+            <p className="text-xs font-semibold uppercase tracking-[0.2em] text-[#6b4f3a]">Welcome back</p>
             <form className="mt-6 grid gap-4">
-              <input className="h-12 rounded-xl border border-current/10 bg-transparent px-4 text-sm" placeholder="Email address" />
-              <input className="h-12 rounded-xl border border-current/10 bg-transparent px-4 text-sm" placeholder="Password" type="password" />
-              <button type="submit" className={`inline-flex h-12 items-center justify-center rounded-full px-6 text-sm font-semibold ${config.action}`}>Sign in</button>
+              <input className={config.field} placeholder="Email address" autoComplete="email" name="email" type="email" />
+              <input className={config.field} placeholder="Password" name="password" type="password" autoComplete="current-password" />
+              <button type="submit" className={`inline-flex h-12 w-full items-center justify-center rounded-xl px-6 text-sm font-semibold ${config.action}`}>
+                Sign in
+              </button>
             </form>
-            <div className={`mt-6 flex items-center justify-between text-sm ${config.muted}`}>
-              <Link href="/forgot-password" className="hover:underline">Forgot password?</Link>
-              <Link href="/register" className="inline-flex items-center gap-2 font-semibold hover:underline">
-                <Sparkles className="h-4 w-4" />
+            <div className="mt-6 flex flex-col gap-2 text-sm sm:flex-row sm:items-center sm:justify-between">
+              <Link href="/forgot-password" className={config.link}>
+                Forgot password?
+              </Link>
+              <Link href="/register" className={`inline-flex items-center gap-2 font-semibold ${config.link}`}>
+                <Sparkles className="h-4 w-4 text-[#e78b48]" aria-hidden />
                 Create account
               </Link>
             </div>
