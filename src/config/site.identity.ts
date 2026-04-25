@@ -1,10 +1,10 @@
 export const siteIdentity = {
   code: process.env.NEXT_PUBLIC_SITE_CODE || '4azpfk7bp0',
   name: process.env.NEXT_PUBLIC_SITE_NAME || 'Bestpressnews',
-  tagline: process.env.NEXT_PUBLIC_SITE_TAGLINE || 'Independent media updates',
+  tagline: process.env.NEXT_PUBLIC_SITE_TAGLINE || 'Global press release distribution & media visibility',
   description:
     process.env.NEXT_PUBLIC_SITE_DESCRIPTION ||
-    'A simple newsroom-style publication for announcements, coverage, and media updates on Bestpressnews.',
+    'Distribute announcements to journalists, monitor pickup, and grow earned coverage with a modern press room built for communicators and newsrooms.',
   domain: process.env.NEXT_PUBLIC_SITE_DOMAIN || 'bestpressnews.com',
   url: process.env.NEXT_PUBLIC_SITE_URL || 'https://bestpressnews.com',
   ogImage: process.env.NEXT_PUBLIC_SITE_OG_IMAGE || '/og-default.png',

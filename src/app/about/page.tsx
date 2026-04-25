@@ -1,93 +1,108 @@
 import Link from "next/link";
-import { PageShell } from "@/components/shared/page-shell";
-import { Card, CardContent } from "@/components/ui/card";
-import { Button } from "@/components/ui/button";
-import { Badge } from "@/components/ui/badge";
-import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
-import { mockTeamMembers } from "@/data/mock-data";
+import Image from "next/image";
+import { NavbarShell } from "@/components/shared/navbar-shell";
+import { Footer } from "@/components/shared/footer";
 import { SITE_CONFIG } from "@/lib/site-config";
+import { buildPageMetadata } from "@/lib/seo";
+import type { Metadata } from "next";
 
-const highlights = [
-  { label: "Creators onboarded", value: "12k+" },
-  { label: "Bookmarks shared", value: "180k" },
-  { label: "Listings published", value: "8.6k" },
-];
+const OFFICE_SHOT = "https://images.unsplash.com/photo-1521737604893-d14cc237f11d?w=1200&h=700&fit=crop&q=80";
 
-const values = [
-  { title: "Curated by people", description: "We believe trusted recommendations beat endless feeds." },
-  { title: "Designed for focus", description: "Clear, calm UI helps you find the next best resource fast." },
-  { title: "Built to share", description: "Collections make collaboration and knowledge flow effortless." },
-];
+export async function generateMetadata(): Promise<Metadata> {
+  return buildPageMetadata({
+    path: "/about",
+    title: "About us",
+    description: `How ${SITE_CONFIG.name} supports communicators and journalists with a modern press wire.`,
+    image: SITE_CONFIG.defaultOgImage,
+  });
+}
+
+const principles = [
+  {
+    title: "Clarity over noise",
+    body: "We strip the page back to what a release needs: provenance, structure, and a clean read—so the story, not the chrome, travels.",
+  },
+  {
+    title: "Built for two audiences",
+    body: "Communicators need speed and measurement; journalists need confidence in datelines and contacts. The same product has to serve both without compromise.",
+  },
+  {
+    title: "Room to grow",
+    body: "Start with the wire, add analytics, IR sync, and training as your team’s calendar gets busier—without replatforming every year.",
+  },
+] as const;
 
 export default function AboutPage() {
   return (
-    <PageShell
-      title={`About ${SITE_CONFIG.name}`}
-      description={`${SITE_CONFIG.name} is a modern platform for creators, communities, and curated business discovery.`}
-      actions={
-        <>
-          <Button variant="outline" asChild>
-            <Link href="/team">Meet the Team</Link>
-          </Button>
-          <Button asChild>
-            <Link href="/contact">Contact Us</Link>
-          </Button>
-        </>
-      }
-    >
-      <div className="grid gap-6 lg:grid-cols-[1.1fr_0.9fr]">
-        <Card className="border-border bg-card">
-          <CardContent className="space-y-4 p-6">
-            <Badge variant="secondary">Our Story</Badge>
-            <h2 className="text-2xl font-semibold text-foreground">
-              A single home for knowledge, discovery, and community.
-            </h2>
-            <p className="text-sm text-muted-foreground">
-              {SITE_CONFIG.name} brings together publishing, listings, and social bookmarking so teams can move faster
-              and keep their best resources close.
-            </p>
-            <div className="grid gap-4 sm:grid-cols-3">
-              {highlights.map((item) => (
-                <div key={item.label} className="rounded-lg border border-border bg-secondary/40 p-4">
-                  <div className="text-2xl font-semibold text-foreground">{item.value}</div>
-                  <div className="text-xs text-muted-foreground">{item.label}</div>
-                </div>
-              ))}
-            </div>
-          </CardContent>
-        </Card>
-        <div className="space-y-4">
-          {values.map((value) => (
-            <Card key={value.title} className="border-border bg-card">
-              <CardContent className="p-6">
-                <h3 className="text-lg font-semibold text-foreground">{value.title}</h3>
-                <p className="mt-2 text-sm text-muted-foreground">{value.description}</p>
-              </CardContent>
-            </Card>
-          ))}
+    <div className="min-h-screen bg-[#f6f2ea] text-[#10202e]">
+      <NavbarShell />
+      <header className="border-b border-[#d4cdc0] bg-white/80">
+        <div className="mx-auto max-w-6xl px-4 py-12 sm:px-6 lg:px-8 lg:py-16">
+          <p className="text-xs font-semibold uppercase tracking-[0.25em] text-[#6b4f3a]">About {SITE_CONFIG.name}</p>
+          <h1 className="mt-3 font-display text-4xl font-semibold tracking-tight text-[#102e50] sm:text-5xl">
+            A press wire for the way companies actually announce news
+          </h1>
+          <p className="mt-5 max-w-2xl text-base leading-8 text-muted-foreground sm:text-lg">
+            {SITE_CONFIG.name} is a distribution and reading platform for press-style updates: earnings, product launches, policy positions, and
+            public-interest stories that deserve a serious page—not a recycled social feed.
+          </p>
         </div>
-      </div>
+      </header>
 
-      <div className="mt-10 grid gap-6 md:grid-cols-3">
-        {mockTeamMembers.map((member) => (
-          <Card key={member.id} className="border-border bg-card transition-transform hover:-translate-y-1">
-            <CardContent className="p-6">
-              <div className="flex items-center gap-3">
-                <Avatar className="h-12 w-12">
-                  <AvatarImage src={member.avatar} alt={member.name} />
-                  <AvatarFallback>{member.name.charAt(0)}</AvatarFallback>
-                </Avatar>
-                <div>
-                  <p className="text-sm font-semibold text-foreground">{member.name}</p>
-                  <p className="text-xs text-muted-foreground">{member.role}</p>
-                </div>
-              </div>
-              <p className="mt-3 text-sm text-muted-foreground">{member.bio}</p>
-              <p className="mt-3 text-xs text-muted-foreground">{member.location}</p>
-            </CardContent>
-          </Card>
-        ))}
-      </div>
-    </PageShell>
+      <section className="mx-auto max-w-6xl px-4 py-12 sm:px-6 lg:px-8">
+        <div className="grid gap-8 lg:grid-cols-[1fr_1.1fr] lg:items-center">
+          <div className="relative aspect-[4/3] overflow-hidden rounded-2xl border border-[#d4cdc0] shadow-md">
+            <Image src={OFFICE_SHOT} alt="Communications team collaborating" fill className="object-cover" sizes="(max-width: 1024px) 100vw, 50vw" />
+          </div>
+          <div>
+            <h2 className="font-display text-2xl font-semibold text-[#102e50]">Why we exist</h2>
+            <p className="mt-4 text-sm leading-7 text-[#2d3a45] sm:text-base">
+              Most “content” products optimize for feeds. We optimize for credibility: a stable URL, a structured body, and a path from press
+              room to search and social without losing context. {SITE_CONFIG.tagline}
+            </p>
+            <div className="mt-6 flex flex-wrap gap-3">
+              <Link
+                href="/updates"
+                className="inline-flex items-center justify-center rounded-lg bg-[#102e50] px-5 py-2.5 text-sm font-semibold text-[#f5c45e] transition hover:bg-[#1a4a6e]"
+              >
+                Browse the wire
+              </Link>
+              <Link
+                href="/contact"
+                className="inline-flex items-center justify-center rounded-lg border border-[#102e50]/20 bg-white px-5 py-2.5 text-sm font-semibold text-[#102e50] transition hover:border-[#e78b48]/50"
+              >
+                Contact the desk
+              </Link>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section className="border-t border-[#d4cdc0] bg-white/60 py-12 sm:py-16">
+        <div className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
+          <h2 className="press-section-title">Principles</h2>
+          <ul className="mt-8 grid list-none gap-5 p-0 sm:grid-cols-3">
+            {principles.map((p) => (
+              <li key={p.title} className="press-card p-5">
+                <h3 className="font-display text-lg font-semibold text-[#102e50]">{p.title}</h3>
+                <p className="mt-2 text-sm leading-7 text-muted-foreground">{p.body}</p>
+              </li>
+            ))}
+          </ul>
+        </div>
+      </section>
+
+      <section className="py-12 sm:py-16">
+        <div className="mx-auto max-w-3xl px-4 text-center sm:px-6">
+          <h2 className="font-display text-2xl font-semibold text-[#102e50]">No filler metrics</h2>
+          <p className="mt-3 text-sm leading-7 text-muted-foreground sm:text-base">
+            We don&apos;t quote vanity stats on this page. When you work with us, you&apos;ll see real readership, pickup signals, and operational
+            SLAs in your account—not placeholder millions from an unrelated product.
+          </p>
+        </div>
+      </section>
+
+      <Footer />
+    </div>
   );
 }
