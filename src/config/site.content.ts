@@ -2,7 +2,7 @@ import type { TaskKey } from '@/lib/site-config'
 
 export const siteContent = {
   navbar: {
-    tagline: 'Press release wire · Media intelligence',
+    tagline: 'Release media wire · Media intelligence',
   },
   footer: {
     tagline: 'Distribution, measurement, and trust for communicators and journalists',
@@ -13,7 +13,7 @@ export const siteContent = {
     description:
       'Send announcements with confidence, reach relevant journalists, and see how your story travels across the media landscape.',
     primaryCta: {
-      label: 'Send a press release',
+      label: 'Send a release media',
       href: '/create/mediaDistribution',
     },
     secondaryCta: {
@@ -71,7 +71,7 @@ export const siteContent = {
       href: '/updates',
     },
   },
-  taskSectionHeading: 'Press releases & updates',
+  taskSectionHeading: 'Release media & updates',
   taskSectionDescriptionSuffix: 'Latest wire posts and company announcements for your market.',
 } as const
 
@@ -105,7 +105,7 @@ export const taskPageMetadata: Record<Exclude<TaskKey, 'comment' | 'org' | 'soci
     description: 'Open PDFs and downloadable files.',
   },
   mediaDistribution: {
-    title: 'Press releases & wire posts',
+    title: 'Release media & wire posts',
     description: 'Filter and search the latest company announcements, filings, and media advisories.',
   },
 }

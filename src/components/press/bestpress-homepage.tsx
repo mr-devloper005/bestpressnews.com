@@ -93,7 +93,7 @@ function getCategory(post: SitePost) {
   const c = post.content && typeof post.content === 'object' ? (post.content as { category?: string }).category : ''
   if (typeof c === 'string' && c.trim()) return c.trim()
   const t = post.tags?.find((x) => typeof x === 'string')
-  return typeof t === 'string' ? t : 'Press release'
+  return typeof t === 'string' ? t : 'Release media'
 }
 
 type Props = { posts: SitePost[] }
@@ -154,7 +154,7 @@ export function BestpressHomepage({ posts }: Props) {
               </button>
               <div className="absolute bottom-4 left-4 right-4 flex items-center justify-between gap-2 rounded-xl border border-white/10 bg-[#0a1f35]/60 px-4 py-2 text-xs text-white/80 backdrop-blur">
                 <span className="flex items-center gap-1.5">
-                  <Camera className="h-3.5 w-3.5" aria-hidden /> Studio-grade layouts for every issue
+                  <Camera className="h-3.5 w-3.5" aria-hidden /> Professional release media for every announcement
                 </span>
                 <span className="hidden sm:inline">HD · 16:9</span>
               </div>
@@ -222,10 +222,6 @@ export function BestpressHomepage({ posts }: Props) {
                   </div>
                 </div>
                 <div className="p-6">
-                  <p className="text-xs text-muted-foreground">
-                    {new Date(lead.publishedAt || Date.now()).toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' })} ·{' '}
-                    {lead.authorName || 'Wire desk'}
-                  </p>
                   <h3 className="mt-2 font-display text-2xl font-semibold text-[#102e50] group-hover:text-[#b83220]">{lead.title}</h3>
                   {lead.summary ? <p className="mt-3 line-clamp-3 text-sm leading-7 text-muted-foreground">{lead.summary}</p> : null}
                   <span className="mt-4 inline-flex items-center gap-1 text-sm font-semibold text-[#102e50]">Read the release</span>
@@ -248,7 +244,6 @@ export function BestpressHomepage({ posts }: Props) {
                       <div className="min-w-0">
                         <p className="text-[10px] font-semibold uppercase tracking-wider text-[#be3d2a]">{getCategory(post)}</p>
                         <p className="mt-0.5 line-clamp-2 font-medium leading-snug text-[#102e50] group-hover:underline">{post.title}</p>
-                        <p className="mt-1 text-xs text-muted-foreground">{new Date(post.publishedAt || Date.now()).toLocaleDateString()}</p>
                       </div>
                     </Link>
                   ))

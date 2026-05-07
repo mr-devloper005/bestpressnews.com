@@ -40,16 +40,14 @@ export function FooterOverride() {
             ) : null}
           </div>
           {column('Product', [
-            { label: 'Press releases', href: '/updates' },
+            { label: 'Release media', href: '/updates' },
             { label: 'Search', href: '/search' },
-            { label: 'Pricing', href: '/pricing' },
             { label: 'Create a release', href: '/create/mediaDistribution' },
           ])}
           {column('Company', [
             { label: 'About', href: '/about' },
             { label: 'Contact', href: '/contact' },
             { label: 'Help', href: '/help' },
-            { label: 'Status', href: '/status' },
           ])}
           {column('Legal', [
             { label: 'Privacy', href: '/privacy' },
