@@ -70,7 +70,7 @@ export async function TaskDetailPageOverride({ task, slug }: { task: TaskKey; sl
                 <li aria-hidden>·</li>
                 <li>
                   <Link className="font-medium text-[#102e50] hover:underline" href={listRoute}>
-                    {task === 'mediaDistribution' ? 'Press releases' : 'Archive'}
+                    {task === 'mediaDistribution' ? 'Release media' : 'Archive'}
                   </Link>
                 </li>
                 <li aria-hidden>·</li>
@@ -78,14 +78,11 @@ export async function TaskDetailPageOverride({ task, slug }: { task: TaskKey; sl
               </ol>
             </nav>
             <p className="mt-6 text-xs font-bold uppercase tracking-[0.2em] text-[#b83220]">
-              {(content.category as string) || 'Press release'}
+              {(content.category as string) || 'Release media'}
             </p>
             <h1 className="mt-3 font-display text-3xl font-semibold leading-tight tracking-tight text-[#102e50] sm:text-4xl lg:text-[2.6rem]">{post.title}</h1>
             {sub ? <p className="mt-4 text-lg leading-relaxed text-[#4a5568] sm:text-xl">{sub}</p> : null}
             <div className="mt-6 flex flex-wrap items-center gap-3 text-sm text-muted-foreground">
-              <span className="rounded-md bg-[#102e50] px-2.5 py-1 text-xs font-semibold text-[#f5c45e]">
-                {new Date(post.publishedAt || Date.now()).toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' })}
-              </span>
               <span>By {post.authorName || 'Editorial desk'}</span>
             </div>
             <div className="mt-6 flex flex-wrap gap-2">
@@ -147,9 +144,6 @@ export async function TaskDetailPageOverride({ task, slug }: { task: TaskKey; sl
                   {related.map((r) => (
                     <li key={r.id}>
                       <Link href={buildPostUrl(task, r.slug)} className="press-card group block p-4 no-underline transition">
-                        <p className="text-xs text-muted-foreground">
-                          {new Date(r.publishedAt || Date.now()).toLocaleDateString()}
-                        </p>
                         <p className="mt-1 font-medium text-[#102e50] group-hover:underline">{r.title}</p>
                         {r.summary ? <p className="mt-1 line-clamp-2 text-sm text-muted-foreground">{r.summary}</p> : null}
                       </Link>

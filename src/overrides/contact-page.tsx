@@ -1,8 +1,7 @@
-import { Mail, MapPin, Phone, Clock, Send } from 'lucide-react'
+import { Send } from 'lucide-react'
 import { NavbarShell } from '@/components/shared/navbar-shell'
 import { Footer } from '@/components/shared/footer'
 import { siteIdentity } from '@/config/site.identity'
-import { SITE_CONFIG } from '@/lib/site-config'
 
 export const CONTACT_PAGE_OVERRIDE_ENABLED = true
 
@@ -22,47 +21,8 @@ export function ContactPageOverride() {
           </p>
         </div>
       </header>
-      <main className="mx-auto max-w-6xl px-4 py-12 sm:px-6 lg:px-8">
-        <div className="grid gap-10 lg:grid-cols-[0.9fr_1.1fr]">
-          <div className="space-y-4">
-            <h2 className="font-display text-lg font-semibold text-[#102e50]">Ways to reach {SITE_CONFIG.name}</h2>
-            <a
-              href={`mailto:${pressEmail}?subject=Press%20inquiry`}
-              className="press-card flex items-start gap-3 p-4 no-underline transition"
-            >
-              <Mail className="mt-0.5 h-5 w-5 shrink-0 text-[#e78b48]" />
-              <div>
-                <p className="text-xs font-bold uppercase tracking-wider text-[#4a5568]">Editorial & sourcing</p>
-                <p className="mt-1 text-base font-semibold text-[#102e50]">{pressEmail}</p>
-                <p className="mt-1 text-sm text-muted-foreground">Wires, corrections, embargoes, and journalist sign-ups.</p>
-              </div>
-            </a>
-            <a
-              href={`mailto:${generalEmail}?subject=General%20enquiry`}
-              className="press-card flex items-start gap-3 p-4 no-underline transition"
-            >
-              <Phone className="mt-0.5 h-5 w-5 shrink-0 text-[#e78b48]" />
-              <div>
-                <p className="text-xs font-bold uppercase tracking-wider text-[#4a5568]">Account & product</p>
-                <p className="mt-1 text-base font-semibold text-[#102e50]">{generalEmail}</p>
-                <p className="mt-1 text-sm text-muted-foreground">Invoices, access, and demo scheduling for communicators.</p>
-              </div>
-            </a>
-            <div className="press-card flex items-start gap-3 p-4">
-              <Clock className="mt-0.5 h-5 w-5 shrink-0 text-[#e78b48]" />
-              <div>
-                <p className="text-xs font-bold uppercase tracking-wider text-[#4a5568]">Coverage hours</p>
-                <p className="mt-1 text-sm text-[#2d3a45]">Monday–Friday, 7:00–20:00 ET. Critical advisories: follow your escalation path in the dashboard when enabled.</p>
-              </div>
-            </div>
-            <div className="press-card flex items-start gap-3 p-4">
-              <MapPin className="mt-0.5 h-5 w-5 shrink-0 text-[#e78b48]" />
-              <div>
-                <p className="text-xs font-bold uppercase tracking-wider text-[#4a5568]">Headquarters</p>
-                <p className="mt-1 text-sm text-[#2d3a45]">U.S. news desk · distributed team across time zones to match release windows.</p>
-              </div>
-            </div>
-          </div>
+      <main className="mx-auto max-w-2xl px-4 py-12 sm:px-6 lg:px-8">
+        <div>
           <div className="press-card p-0">
             <div className="border-b border-border/60 bg-gradient-to-r from-[#f5c45e]/20 to-transparent px-6 py-4">
               <h2 className="font-display text-xl font-semibold text-[#102e50]">Write to the team</h2>
