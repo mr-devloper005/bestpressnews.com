@@ -12,9 +12,7 @@ export const NAVBAR_OVERRIDE_ENABLED = true
 
 const STATIC_LINKS = [
   { label: 'Home', href: '/' },
-  { label: 'Pricing', href: '/pricing' },
   { label: 'About', href: '/about' },
-  { label: 'Contact', href: '/contact' },
 ] as const
 
 export function NavbarOverride() {
@@ -26,9 +24,7 @@ export function NavbarOverride() {
   const navItems = [
     { label: 'Home', href: '/' },
     primaryTask ? { label: primaryTask.label, href: primaryTask.route } : null,
-    { label: 'Pricing', href: '/pricing' },
     { label: 'About', href: '/about' },
-    { label: 'Contact', href: '/contact' },
   ].filter(Boolean) as { label: string; href: string }[]
 
   return (

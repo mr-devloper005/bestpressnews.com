@@ -164,7 +164,6 @@ export async function TaskListPageOverride({
                   </div>
                   <div className="flex flex-1 flex-col p-4">
                     <p className="text-[11px] text-muted-foreground">
-                      {new Date(post.publishedAt || Date.now()).toLocaleDateString(undefined, { year: 'numeric', month: 'short', day: 'numeric' })} ·{' '}
                       {post.authorName || 'Wire'}
                     </p>
                     <h2 className="mt-1 font-display text-lg font-semibold text-[#102e50] group-hover:text-[#b83220]">{post.title}</h2>
