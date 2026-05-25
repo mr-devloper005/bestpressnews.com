@@ -20,14 +20,14 @@ export default function RootLayout({ children }: { children: ReactNode }) {
   const siteFontVariables = getSiteFontVariables()
 
   return (
-    <html lang="en" suppressHydrationWarning>
+    <html lang="en" suppressHydrationWarning className="bg-[#0d2438]">
       <head>
         {googleFontsHref ? <link rel="stylesheet" href={googleFontsHref} /> : null}
       </head>
       <body
         data-site-shell={recipe.homeLayout}
         data-motion-pack={recipe.motionPack}
-        className={`${brandPack.bodyClassName} ${brandPack.fontClassName} ${brandPack.paletteClassName}`}
+        className={`${brandPack.bodyClassName} ${brandPack.fontClassName} ${brandPack.paletteClassName} flex min-h-screen flex-col`}
         style={siteFontVariables}
       >
         <ThemeProvider attribute="class" defaultTheme="light" enableSystem={false}>
