@@ -20,7 +20,7 @@ export default function RootLayout({ children }: { children: ReactNode }) {
   const siteFontVariables = getSiteFontVariables()
 
   return (
-    <html lang="en" suppressHydrationWarning className="bg-[#0d2438]">
+    <html lang="en" suppressHydrationWarning>
       <head>
         {googleFontsHref ? <link rel="stylesheet" href={googleFontsHref} /> : null}
       </head>
